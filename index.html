@@ -1,18 +1,73 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <title>my-first-website</title>
-  <LINK href="styles.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>匿名漂流瓶 · 微信小程序原型</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <main class="app-shell">
+    <header class="app-header">
+      <h1>匿名漂流瓶</h1>
+      <p>扔一个秘密，捞一段故事。</p>
+    </header>
 
-<img src="https://octodex.github.com/images/daftpunktocat-thomas.gif" id="octocat" alt="octocat-gif" />
+    <nav class="tabs" aria-label="主功能">
+      <button class="tab is-active" data-tab="throw">扔瓶子</button>
+      <button class="tab" data-tab="sea">捞瓶子</button>
+      <button class="tab" data-tab="mine">我的瓶子</button>
+    </nav>
 
-<!-- Change this code here by copy and pasting your template on line 15 -->
-<p>Welcome to your first GitHub Pages website!</p>
+    <section class="panel is-active" id="throw">
+      <form id="throwForm" class="card">
+        <h2>写下你的漂流瓶</h2>
+        <label class="field-label" for="message">内容（匿名）</label>
+        <textarea id="message" maxlength="200" placeholder="今天你想说点什么？" required></textarea>
+        <div class="voice-tools">
+          <button type="button" id="voiceBtn" class="secondary">🎙️ 语音输入</button>
+          <small id="voiceHint">点击开始语音转文字（浏览器支持时可用）</small>
+        </div>
+        <div class="meta-row">
+          <label>
+            心情
+            <select id="mood">
+              <option value="平静">平静</option>
+              <option value="开心">开心</option>
+              <option value="迷茫">迷茫</option>
+              <option value="焦虑">焦虑</option>
+              <option value="期待">期待</option>
+            </select>
+          </label>
+          <small><span id="counter">0</span>/200</small>
+        </div>
+        <button type="submit" class="primary">投入大海</button>
+      </form>
+    </section>
 
+    <section class="panel" id="sea">
+      <article id="pickedBottle" class="card empty-state">
+        <h2>海面平静中</h2>
+        <p>点击下方按钮，随机捞一个陌生人的漂流瓶。</p>
+      </article>
+      <div class="actions">
+        <button id="pickBtn" class="primary">随机捞一个</button>
+        <button id="replyBtn" class="secondary" disabled>发送匿名回复</button>
+        <button id="reportBtn" class="danger" disabled>⚠️ 投诉举报该瓶子</button>
+      </div>
+    </section>
+
+    <section class="panel" id="mine">
+      <article class="card">
+        <h2>我投出的漂流瓶</h2>
+        <ul id="myBottles" class="bottle-list"></ul>
+        <p id="myEmpty" class="hint">你还没有投出任何漂流瓶。</p>
+      </article>
+    </section>
+
+    <p id="toast" role="status" aria-live="polite"></p>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
